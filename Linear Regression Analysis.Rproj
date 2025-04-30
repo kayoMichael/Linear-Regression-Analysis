@@ -1,0 +1,16 @@
+Version: 1.0
+ProjectId: cb7e1b9c-39f4-4157-be78-dcd33ad4ee43
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: pdfLaTeX
+
+ProjectName: Linear Regression Analysis
