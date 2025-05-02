@@ -100,6 +100,11 @@ mod_final <- lm(log(gamble + 1) ~ income + sex:income, data = teengamb)
 # Identify influential observation using Cook’s Distance
 cooks_d <- cooks.distance(mod_final)
 
+# Plot the Cook's Distance for Visualization
+plot(cooks_d, type = "h", main = "Cook's Distance", 
+     ylab = "Cook's distance", xlab = "Observation Number")
+abline(h = 4/length(cooks_d), col = "red", lty = 2)
+
 # Refit model without influential point
 influential_index <- which.max(cooks_d)
 teengamb_clean <- teengamb[-influential_index, ]
