@@ -1,6 +1,20 @@
 # Multiple Linear Regression of Teenage Gambling in Britain
 This project presents a complete multiple linear regression analysis of teen gambling behavior in Britain, using the `teengamb` dataset. The workflow includes exploratory data visualization, model building with interaction terms, exhaustive model selection, diagnostic checks, transformation using Box-Cox and log functions, and final model interpretation. 
 
+## Table of Contents
+- [Dataset Information](#dataset-information)
+- [Preliminary Analysis](#preliminary-analysis)
+- [Interaction Terms](#interaction-terms)
+- [Exhaustive Subset Selection](#exhaustive-subset-selection)
+- [Diagnostic Check for Multiple Linear Regression](#diagnostic-check-for-multiple-linear-regression)
+- [Box-Cox Transformation](#box-cox-transformation)
+- [Analysis of Variance (ANOVA)](#analysis-of-variance-anova)
+- [Outliers](#outliers)
+- [Prediction Interval](#prediction-interval-for-sample-individuals)
+- [Final Model](#final-model)
+- [Final Interpretation](#final-interpretation)
+
+  
 ## Dataset Information
 ### Description
 The teengamb data frame has 47 rows and 5 columns. A survey was conducted to study teenage gambling in Britain.
