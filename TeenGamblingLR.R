@@ -4,6 +4,7 @@ teengamb <- faraway::teengamb
 head(teengamb)
 library(leaps)
 library(MASS)
+library(boot)
 
 # Visualize relationship between income and gambling expenditure
 plot(teengamb$income, teengamb$gamble, main = "Gambling Expenditure per Year (pounds) vs income per week (pounds)",
@@ -55,7 +56,7 @@ plot(mod_3$fitted.values, resid(mod_3),
 qqnorm(resid(mod_3))
 qqline(resid(mod_3))
 
-# Use Box-Cox transformation to determine suitable transformation (must load MASS)
+# Use Box-Cox transformation to determine suitable transformation
 mod_3_shifted <- lm(I(gamble + 1) ~ income + status:income + sex:income, data = teengamb)
 bc <- boxcox(mod_3_shifted, plotit=TRUE)
 bc$x[which.max(bc$y)]
@@ -72,7 +73,7 @@ plot(mod_3_log$fitted.values, resid(mod_3_log),
 qqnorm(resid(mod_3_log))
 qqline(resid(mod_3_log))
 
-# View summary statistics of the transformed model
+# View P Value of Each Predictor Variates
 summary(mod_3_log)
 
 # Extract confidence intervals for coefficients of the log model
@@ -82,14 +83,27 @@ confint(mod_3_log)
 model_reduced <- lm(log(gamble + 1) ~ income, data = teengamb)
 anova(model_reduced, mod_3_log)
 
+# Test to see if income:status is necessary
+model_1 <- glm(log(gamble + 1) ~ income + sex:income, data = teengamb)
+model_2 <- glm(log(gamble + 1) ~ income + sex:income + status:income, data = teengamb)
+
+# Perform 10-fold cross-validation
+cv_1 <- cv.glm(teengamb, model_1, K = 10)$delta[1]
+cv_2 <- cv.glm(teengamb, model_2, K = 10)$delta[1]
+
+cv_1
+cv_2
+
+# Since income:status is not significant, refit model without it
+mod_final <- lm(log(gamble + 1) ~ income + sex:income, data = teengamb)
+
 # Identify influential observation using Cook’s Distance
-cooks_d <- cooks.distance(mod_3_log)
-which.max(cooks_d)  # Index of most influential point
+cooks_d <- cooks.distance(mod_final)
 
 # Refit model without influential point
 influential_index <- which.max(cooks_d)
 teengamb_clean <- teengamb[-influential_index, ]
-mod_3_clean <- lm(log(gamble + 1) ~ income + status:income + sex:income, data = teengamb_clean)
+mod_3_clean <- lm(log(gamble + 1) ~ income + sex:income, data = teengamb_clean)
 summary(mod_3_clean)
 
 # Refit reduced model without influential point
@@ -103,9 +117,9 @@ new_data <- data.frame(
   sex = factor(c("Male", "Female", "Female"), levels = c("Male", "Female"))
 )
 # Predict on log scale with 95% prediction intervals
-log_preds <- predict(mod_3_log, newdata = new_data, interval = "prediction", level = 0.95)
+log_preds <- predict(mod_final, newdata = new_data, interval = "prediction", level = 0.95)
 # Back-transform from log(gamble + 1) to original gamble scale
 exp(log_preds) - 1
 
 # Final model summary
-summary(mod_3_log)
+summary(mod_final)
