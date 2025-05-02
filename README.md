@@ -1,6 +1,20 @@
 # Multiple Linear Regression of Teenage Gambling in Britain
 This project presents a complete multiple linear regression analysis of teen gambling behavior in Britain, using the `teengamb` dataset. The workflow includes exploratory data visualization, model building with interaction terms, exhaustive model selection, diagnostic checks, transformation using Box-Cox and log functions, and final model interpretation. 
 
+## Table of Contents
+- [Dataset Information](#dataset-information)
+- [Preliminary Analysis](#preliminary-analysis)
+- [Interaction Terms](#interaction-terms)
+- [Exhaustive Subset Selection](#exhaustive-subset-selection)
+- [Diagnostic Check for Multiple Linear Regression](#diagnostic-check-for-multiple-linear-regression)
+- [Box-Cox Transformation](#box-cox-transformation)
+- [Analysis of Variance (ANOVA)](#analysis-of-variance-anova)
+- [Outliers](#outliers)
+- [Prediction Interval](#prediction-interval-for-sample-individuals)
+- [Final Model](#final-model)
+- [Final Interpretation](#final-interpretation)
+
+  
 ## Dataset Information
 ### Description
 The teengamb data frame has 47 rows and 5 columns. A survey was conducted to study teenage gambling in Britain.
@@ -95,10 +109,10 @@ It is clear that the fanning out pattern of the residuals plot has been severely
 
 <img width="660" alt="スクリーンショット 2025-05-01 午後7 02 00" src="https://github.com/user-attachments/assets/3830b5f2-215a-4b2e-b3a5-4452bd20749a" />
 
-The normality of Residuals did not change much after transformation. There still exists a slight deviation in both tails of the residuals. But the over all fit still lies near the line thus the residuals are generally normally distributed.
+The normality of Residuals does not change much after transformation. There still exists a slight deviation in both tails of the residuals. But the over all fit still lies near the line thus the residuals are generally normally distributed.
 
 ## Analysis of Variance (ANOVA)
-We first establish that we will proceed with null hypothesis with α = 0.05
+We first establish that we will proceed the null hypothesis with α = 0.05
 
 ### ANOVA of status:income and sex:income
 #### $H_0: \beta_{\text{income:status}} = \beta_{\text{income:sex}} = 0$
@@ -127,33 +141,37 @@ Although status:income slightly lowers the cross-validation error, the improveme
 ## Outliers
 We use Cook's Distance to Identify an Influential Outlier and refit the model after deleting it.
 
+<img width="659" alt="スクリーンショット 2025-05-02 午前10 40 05" src="https://github.com/user-attachments/assets/f1e57071-6734-4eb0-b780-29e682b17b85" />
+
 ### Comparing with the original model
 <img width="717" alt="スクリーンショット 2025-05-01 午後8 47 41" src="https://github.com/user-attachments/assets/fed3b87e-7cc6-4cd0-8257-e8df28119046" />
 
 #### Before Deletion (teengamb)
+```
+Adjusted R²: 0.426
 
-    Adjusted R²: 0.426
+Residual SE: 1.134
 
-    Residual SE: 1.134
+income: significant (p ≈ 4.7e-6)
 
-    income: significant (p ≈ 4.7e-6)
-
-    income:sexFemale: significant (p ≈ 0.00028)
+income:sexFemale: significant (p ≈ 0.00028)
+```
 
 #### After Deletion (teengamb_clean)
+```
+Adjusted R²: 0.441
 
-    Adjusted R²: 0.441
+Residual SE: 1.132
 
-    Residual SE: 1.132
+income: still very significant (p ≈ 1e-5)
 
-    income: still very significant (p ≈ 1e-5)
-
-    income:sexFemale: still very significant (p ≈ 0.00023)
+income:sexFemale: still very significant (p ≈ 0.00023)
+```
 
 The output is almost negligible thus removing the outlier is not neccessary.
 
 ## Prediction Interval for sample Individuals
-We Create 3 Sample Individual to Test the prediction intervals with out model.
+We Create 3 Sample Individual to Test the prediction intervals with our model.
 ### income = £10 per week, sex = Male
 The predicted gambling expenditure is approximately £41.24, with a 95% prediction interval of £2.88 to £458.77.
 
