@@ -6,7 +6,7 @@ library(leaps)
 library(MASS)
 
 # Visualize relationship between income and gambling expenditure
-plot(teengamb$income, teengamb$gamble, 
+plot(teengamb$income, teengamb$gamble, main = "Gambling Expenditure per Year (pounds) vs income per week (pounds)",
      xlab="Income per Week (pounds)", 
      ylab="Gambling Expenditure per Year (pounds)")
 model <- lm(gamble ~ income, data = teengamb)
