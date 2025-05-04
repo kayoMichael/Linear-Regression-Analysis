@@ -191,4 +191,4 @@ The predicted gambling expenditure is approximately £1.72, with a 95% predictio
 ## Final Interpretation
 We conclude that there does exist a significant relationship between income and yearly gambling expenditure but only among males. \
 For each £1 increase in weekly income, males’ gambling expenditure increases substantially, while females’ gambling does not increase — in fact, it slightly decreases, but not meaningfully. \
-We also see that there is no statistical evidence that the effect of weekly income on gambling expenditure depends on a teen's socioeconomic status. In other words, males from any social economic upbringing tend to have incrreased annual gambling expenditures as weekly incomes rises. 
+We also see that there is no statistical evidence that the effect of weekly income on gambling expenditure depends on a teen's socioeconomic status. In other words, males from any social economic upbringing tend to have increased annual gambling expenditures as weekly incomes rises. 
