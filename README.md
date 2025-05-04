@@ -50,15 +50,15 @@ A Preliminary plot of Gambling Expenditure shows that there exists a slight posi
 ### Preliminary Visual Analysis between sex and gambling expenditure
 <img width="441" alt="スクリーンショット 2025-05-01 午後4 24 15" src="https://github.com/user-attachments/assets/ea00f114-1f76-4016-94a7-2774a9547773" />
 
-A Preliminary box-plot of sex and gambling expenditure shows that males tend to have both a higher tendency, higher variance and higher median of gambling expenditure compared to a female.
+A Preliminary box-plot of sex and gambling expenditure shows that males tend to have both a higher tendency, higher variance and higher median of gambling expenditure compared to females.
 
 ## Interaction Terms
 To Validate the initial analysis, we add the following interaction terms in to the model:
-- `status * income`: Effect of income on gambling depending on a person's status
-- `sex * income`: Effect of income on gambling depending on a person's sex
+- `status:income`: Effect of income on gambling depending on a person's status
+- `sex:income`: Effect of income on gambling depending on a person's sex
 
 Cognitive abilities are also known to affect a person's gambling expenditure. Thus we add this interaction term to measure whether the effect is the same between a person's sex.
-- `sex * verbal`: Effect of verbal score on gambling depending on a person's sex
+- `sex:verbal`: Effect of verbal score on gambling depending on a person's sex
 
 ## Exhaustive Subset Selection
 ### Adjusted R²
@@ -100,7 +100,7 @@ It is clear that the current model breaks some MLR assumptions thus we apply a *
 
 <img width="741" alt="スクリーンショット 2025-05-01 午後5 36 39" src="https://github.com/user-attachments/assets/02191efb-c09a-4470-bca3-5841b2c227c8" />
 
-λ = 0.606 implies that we need to apply a log tranformation. We perform the transformation log(x + 1) since some entries are 0. 
+λ = 0.606 ≈ 0 and since our dataset shows heteroscedasticity, we apply a log tranformation to correct the variance. We perform the transformation log(x + 1) since some entries are 0. 
 
 ### Post-Transformation Result Analysis
 <img width="657" alt="スクリーンショット 2025-05-01 午後5 40 20" src="https://github.com/user-attachments/assets/c8eae513-67f7-4ec4-baaa-363ed0a369b3" />
@@ -119,7 +119,7 @@ We first establish that we will proceed the null hypothesis with α = 0.05
 
 <img width="549" alt="スクリーンショット 2025-05-01 午後7 18 02" src="https://github.com/user-attachments/assets/6e9e947d-52fc-48c5-bf1d-6360a3a85b70" />
 
-Since p=0.001361<α, we reject the null hypothesis. This indicates that at least one of the interaction terms, status:income or sex:income, is statistically significant in explaining variation in gambling expenditure.
+Since p=0.001361 < α, we reject the null hypothesis. This indicates that at least one of the interaction terms, status:income or sex:income, is statistically significant in explaining variation in gambling expenditure.
 
 ### Null Hypothesis for each predictor variate
 <img width="498" alt="スクリーンショット 2025-05-01 午後7 32 53" src="https://github.com/user-attachments/assets/6a93bdb3-094e-4519-822d-5d9c7d1e0d53" />
@@ -171,7 +171,7 @@ income:sexFemale: still very significant (p ≈ 0.00023)
 The output is almost negligible thus removing the outlier is not neccessary.
 
 ## Prediction Interval for sample Individuals
-We Create 3 Sample Individual to Test the prediction intervals with our model.
+We create 3 sample individual to test the prediction intervals with our model.
 ### income = £10 per week, sex = Male
 The predicted gambling expenditure is approximately £41.24, with a 95% prediction interval of £2.88 to £458.77.
 
@@ -191,4 +191,4 @@ The predicted gambling expenditure is approximately £1.72, with a 95% predictio
 ## Final Interpretation
 We conclude that there does exist a significant relationship between income and yearly gambling expenditure but only among males. \
 For each £1 increase in weekly income, males’ gambling expenditure increases substantially, while females’ gambling does not increase — in fact, it slightly decreases, but not meaningfully. \
-We also see that there is no statistical evidence that the effect of weekly income on gambling expenditure depends on a teen's socioeconomic status.
+We also see that there is no statistical evidence that the effect of weekly income on gambling expenditure depends on a teen's socioeconomic status. In other words, males from any social economic upbringing tend to have incrreased annual gambling expenditures as weekly incomes rises. 
